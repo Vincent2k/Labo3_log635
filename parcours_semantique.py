@@ -38,7 +38,7 @@ def example5(s1):
 
 #example5('tous les cochons sont gros')
 
-sents1 = ['La victime est moutarde']
+sents1 = ['La victime a été tuée à 22h']
 sents2 = ['Jean tua Marie avec une corde']
 sents3 = ['une corde tua Marie avec une corde dans la cuisine']
 sents4 = ['tous les cochons sont gros']
@@ -48,7 +48,7 @@ def printResults (results):
         for (synrep, semrep) in result:
             print(semrep)
 
-printResults(nltk.interpret_sents(sents1, '635/victime.fcfg'))
+printResults(nltk.interpret_sents(sents1, 'heure_crime.fcfg'))
 #printResults(nltk.interpret_sents(sents2, '635/sem02app.fcfg'))
 #printResults(nltk.interpret_sents(sents3, '635/sem03app.fcfg'))
 #printResults(nltk.interpret_sents(sents3, '635/sem04.fcfg'))
