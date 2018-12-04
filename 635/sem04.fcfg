@@ -1,0 +1,15 @@
+% start S
+S[SEM = <some e.(?vp(e) and agt (e,?suj))>] -> NP[SEM=?suj] VP[SEM=?vp]
+VP[SEM=<\e.(?vp(e) and ?pp(e))>] -> VP[SEM=?vp] PP[SEM=?pp]
+VP[SEM=<\e.(?v(e) and obj(e,?np))>] -> V[SEM=?v] NP[SEM=?np]
+PP[SEM=<app(?p, ?np)>] -> P[SEM=?p] NP[SEM=?np]
+NP[SEM=?np] -> Det N[SEM=?np]
+NP[SEM=?np] -> Nprop[SEM=?np]
+V[SEM=<\e.Event(e,tuer)>] -> 'tua'
+P[SEM=<\x.\e.instr (e,x)>] -> 'avec'
+P[SEM=<\x.\e.loc (e,x)>] -> 'dans'
+Nprop[SEM=<jean>] -> 'Jean'
+Nprop[SEM=<marie>] -> 'Marie'
+Det -> 'une' | 'la'
+N[SEM=<corde>] -> 'corde'
+N[SEM=<cuisine>] -> 'cuisine'

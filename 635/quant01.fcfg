@@ -1,0 +1,12 @@
+% start S
+S[SEM = <app(?suj, ?vp)>] -> NP[SEM=?suj] VP[SEM=?vp]
+VP[SEM=?ap] -> Cop AP[SEM=?ap]
+NP[SEM=<?qp(?np)>] -> Quant[SEM=?qp] NP[SEM=?np]
+NP[SEM=?np] -> Det N[SEM=?np]
+AP[SEM=?ap] -> Adj[SEM=?ap]
+
+Det -> 'les'
+Adj[SEM=<\x.gros(x)>] -> 'gros'
+N[SEM=<\x.cochons(x)>] -> 'cochons'
+Cop -> 'sont'
+Quant[SEM=<\P.(\Q.(all x.(P(x) implies Q(x))))>] -> 'tous'

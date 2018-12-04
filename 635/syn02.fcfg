@@ -1,0 +1,7 @@
+S -> NP VP
+VP -> V[subcat=0]
+VP -> V[subcat=1] NP
+NP -> 'Jean'
+NP -> 'Marie'
+V[subcat=0] -> 'marche'
+V[subcat=1] -> 'aime'
