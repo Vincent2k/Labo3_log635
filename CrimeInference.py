@@ -56,6 +56,7 @@ class CrimeInference:
 	def _combine_clauses(self):
 		# Determine crime room
 		self.clauses.append(expr('IsDead(x) & IsInHour(x, y, h) & CrimeHour(z) ==> CrimeRoom(y)'))
+		self.clauses.append(expr('IsDead(x) & IsIn(x, y) ==> CrimeRoom(y)'))
 
 		# Determine crime weapon
 		self.clauses.append(expr('CrimeRoom(x) & Weapon(y) & IsIn(y, x) ==> CrimeWeapon(y)'))
