@@ -11,7 +11,7 @@ Prep -> 'dans'
 Det -> 'le' | 'la'
 N[SEM=<Cuisine>] -> 'cuisine'
 N[SEM=<Salon>] -> 'salon'
-N[SEM=<Burean>] -> 'burean'
+N[SEM=<Burean>] -> 'bureau'
 N[SEM=<Garage>] -> 'garage'
 N[SEM=<Toilette>] -> 'toilette'
 

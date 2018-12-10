@@ -1,5 +1,6 @@
 from aima.utils import *
 from aima.logic import *
+from sentenceAnalyzer import CrimeSentenceAnalyzer
 
 class CrimeInference:
 	def __init__(self):
@@ -63,8 +64,6 @@ class CrimeInference:
 		self.clauses.append(expr("IsDead(x) & Fracture(x) ==> CrimeWeapon(Matraque)"))
 		self.clauses.append(expr("IsDead(x) & Burn(x) ==> CrimeWeapon(Corde)"))
 
-		self.clauses.append(expr('CrimeRoom(x) & IsIn(y, x) & Alive(y) ==> Suspect(y)'))
-
 		self.clauses.append(expr('IsDead(x) ==> Innocent(x)'))
 		self.clauses.append(expr("CrimeRoom(r1) & Different(r1, r2) & CrimeHour(h) & IsInHour(p,r2,h) ==> Innocent(p)"))
 
@@ -77,8 +76,8 @@ class CrimeInference:
 	def add_in_room(self, something, room):
 		self.crime_kb.tell(expr(self.is_in_clause.format(something, room)))
 
-	def add_in_room_hour(self, something, room, hour):
-		self.crime_kb.tell(expr(self.is_in_hour_clause.format(something, room, hour)))
+	def add_in_room_hour(self, expression):
+		self.crime_kb.tell(expression)
 
 	def add_wound_on_person(self, person):
 		self.crime_kb.tell(expr(self.wound_clause.format(person)))
@@ -119,20 +118,3 @@ class CrimeInference:
 	def get_innocent(self):
 		result = fol_fc_ask(self.crime_kb, expr('Innocent(innocent)'))
 		print(list(result))
-
-
-crime = CrimeInference()
-
-crime.add_crime_hour('H2')
-crime.add_dead_person('Black')
-crime.add_in_room_hour('Black', 'Cuisine', 'H2')
-crime.add_burn_on_person('Black')
-crime.add_alive_person('Violet')
-crime.add_alive_person('bob')
-crime.add_alive_person('bob')
-crime.add_alive_person('bob')
-crime.add_in_room_hour('Violet', 'Bureau', 'H2')
-
-print(crime.get_crime_room())
-print(crime.get_crime_weapon())
-crime.get_innocent()
