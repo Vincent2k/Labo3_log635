@@ -76,8 +76,8 @@ class CrimeInference:
 	def add_in_room(self, something, room):
 		self.crime_kb.tell(expr(self.is_in_clause.format(something, room)))
 
-	def add_in_room_hour(self, expression):
-		self.crime_kb.tell(expression)
+	def add_in_room_hour(self, something, room, hour):
+		self.crime_kb.tell(expr(self.is_in_hour_clause.format(something, room, hour)))
 
 	def add_wound_on_person(self, person):
 		self.crime_kb.tell(expr(self.wound_clause.format(person)))
@@ -113,8 +113,8 @@ class CrimeInference:
 
 	def get_suspect(self):
 		result = self.crime_kb.ask(expr('Suspect(suspect)'))
-		print(result)
+		return result
 
 	def get_innocent(self):
 		result = fol_fc_ask(self.crime_kb, expr('Innocent(innocent)'))
-		print(list(result))
+		return list(result)
