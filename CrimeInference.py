@@ -32,6 +32,8 @@ class CrimeInference:
 		self.room_different_clause = 'Different({},{})' # Room 1 is different from room 2
 		self.crime_hour_clause = 'CrimeHour({})' # Parameter is the crime hour
 
+		self.was_with_hour_clause = 'WasWithHour({},{},{})' #Parameter 1 was with paramater 2 at time parameter 3
+
 		self.person_has_object_clause = 'PersonHas({},{})' # Parameter 1 has paramter 2
 
 	def _initilize_base_knowledge(self):
@@ -102,6 +104,9 @@ class CrimeInference:
 
 	def person_has_object(self, person, something):
 		self.crime_kb.tell(expr(self.person_has_object_clause.format(person, something)))
+
+	def person_was_with(self, person1, person2, hour):
+		self.crime_kb.tell(expr(self.was_with_hour_clause.format(person1, person2, hour)))
 
 	def get_crime_room(self):
 		result = self.crime_kb.ask(expr('CrimeRoom(x)'))

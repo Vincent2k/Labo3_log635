@@ -8,6 +8,7 @@ class CrimeSentenceAnalyzer:
         self._crime_hour_grammar_file = '635/heure_crime.fcfg'
         self._location_hour_grammar_file = '635/emplacement_heure.fcfg'
         self._location_person_grammar = '635/emplacement_personnage.fcfg'
+        self.was_with_who_grammar = '635/etait_avec_qui.fcfg'
 
     def who_is_the_victime(self, sentence):
         return str(nltk.interpret_sents(sentence, self._victim_grammar_file)[0][0][1])
@@ -31,6 +32,10 @@ class CrimeSentenceAnalyzer:
         result = str(nltk.interpret_sents(sentence, self._location_hour_grammar_file)[0][0][1])
         return self.parse_result_room_hour(result)
 
+    def who_was_with_who(self, sentence):
+        result = str(nltk.interpret_sents(sentence, self.was_with_who_grammar)[0][0][1])
+        return self.parse_result_was_with(result)
+
     def parse_result_room_hour(self, result):
         response = {}
         response['name'] = result.split(',')[0].split('(')[1]
@@ -42,4 +47,11 @@ class CrimeSentenceAnalyzer:
         response = {}
         response['name'] = result.split(',')[0].split('(')[1]
         response['room'] = result.split(',')[1].split(')')[0]
+        return response
+
+    def parse_result_was_with(self, result):
+        response = {}
+        response['name1'] = result.split(',')[0].split('(')[1]
+        response['name2'] = result.split(',')[1]
+        response['hour'] = 'H' + result.split(',')[2].split(')')[0]
         return response
