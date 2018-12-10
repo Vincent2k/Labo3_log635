@@ -1,6 +1,5 @@
 from aima.utils import *
 from aima.logic import *
-from sentenceAnalyzer import CrimeSentenceAnalyzer
 
 class CrimeInference:
 	def __init__(self):
@@ -32,6 +31,8 @@ class CrimeInference:
 
 		self.room_different_clause = 'Different({},{})' # Room 1 is different from room 2
 		self.crime_hour_clause = 'CrimeHour({})' # Parameter is the crime hour
+
+		self.person_has_object_clause = 'PersonHas({},{})' # Parameter 1 has paramter 2
 
 	def _initilize_base_knowledge(self):
 		# Initialize knowledge about room difference
@@ -65,7 +66,8 @@ class CrimeInference:
 		self.clauses.append(expr("IsDead(x) & Burn(x) ==> CrimeWeapon(Corde)"))
 
 		self.clauses.append(expr('IsDead(x) ==> Innocent(x)'))
-		self.clauses.append(expr("CrimeRoom(r1) & Different(r1, r2) & CrimeHour(h) & IsInHour(p,r2,h) ==> Innocent(p)"))
+		self.clauses.append(expr("CrimeRoom(r1) & Different(r1, r2) & Alive(p) & CrimeHour(h) & IsInHour(p,r2,h) ==> Innocent(p)"))
+		self.clauses.append(expr("PersonHas(x, y) & IsInHour(y, s, h) ==> IsInHour(x, s, h)"))
 
 	def add_alive_person(self, person):
 		self.crime_kb.tell(expr(self.alive_clause.format(person)))
@@ -96,6 +98,9 @@ class CrimeInference:
 
 	def add_crime_hour(self, hour):
 		self.crime_kb.tell(expr(self.crime_hour_clause.format(hour)))
+
+	def person_has_object(self, person, something):
+		self.crime_kb.tell(expr(self.person_has_object_clause.format(person, something)))
 
 	def get_crime_room(self):
 		result = self.crime_kb.ask(expr('CrimeRoom(x)'))

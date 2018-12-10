@@ -24,7 +24,7 @@ class CrimeSentenceAnalyzer:
     #La victime est morte à 22h
     #La victime a été tuée à 22h
     def what_is_the_crime_hour(self, sentence):
-        return str(nltk.interpret_sents(sentence, self._crime_hour_grammar_file)[0][0][1])
+        return 'H' + str(nltk.interpret_sents(sentence, self._crime_hour_grammar_file)[0][0][1])
 
     #Moutarde était dans le salon à 22h
     def where_in_room_in_hour(self, sentence):
@@ -35,7 +35,7 @@ class CrimeSentenceAnalyzer:
         response = {}
         response['name'] = result.split(',')[0].split('(')[1]
         response['room'] = result.split(',')[1]
-        response['hour'] = result.split(',')[2].split(')')[0]
+        response['hour'] = 'H' + result.split(',')[2].split(')')[0]
         return response
 
     def parse_result_person_location(self, result):

@@ -2,14 +2,14 @@
 
 S[SEM=<app(?vp, ?np)>] -> NP[SEM=?np] VP[SEM=?vp]
 
-NP[SEM=?np] -> Nprop[SEM=?np]
+NP[SEM=?np] -> Nprop[SEM=?np] | Det NArme[SEM=?np]
 VP[SEM=<app(?pp, ?nh)>] -> V PP[SEM=?pp] 'à' Nh[SEM=?nh]
 V -> 'était'
 
 PP[SEM=<app(?p, ?nc)>] -> P[SEM=?p] NChambre[SEM=?nc]
 P[SEM=<\x.\y.\z.IsInHour(z, x, y)>] -> 'dans' Det
 
-Det -> 'le' | 'la'
+Det -> 'le' | 'la' | 'Le' | 'La'
 
 Nprop[SEM=<Moutarde>] -> 'Moutarde' | 'moutarde'
 Nprop[SEM=<Pervenche>] -> 'Prevenche' | 'prevenche'
@@ -18,6 +18,10 @@ Nprop[SEM=<Olive>] -> 'Olive' | 'olive'
 Nprop[SEM=<Leblanc>] -> 'Leblanc' | 'leblanc'
 Nprop[SEM=<Violet>] -> 'Violet' | 'violet'
 Nprop[SEM=<Black>] -> 'Black' | 'black'
+
+NArme[SEM=<Revolver>] -> 'revolver'
+NArme[SEM=<Corde>] -> 'corde'
+NArme[SEM=<Poignard>] -> 'poignard'
 
 NChambre[SEM=<Cuisine>] -> 'cuisine'
 NChambre[SEM=<Salon>] -> 'salon'
